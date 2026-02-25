@@ -8,392 +8,328 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --purple-900: #25214a; --purple-800: #2c2758; --purple-700: #463e8d;
-  --purple-600: #4e46b9; --purple-500: #6966cc; --purple-400: #8888dd;
-  --purple-300: #adafeb;
-  --teal-700: #1a6c68; --teal-600: #12a19b; --teal-500: #2db9b2;
-  --teal-400: #6bdbd6; --teal-300: #98e6e2;
-  --neutral-900: #303030; --neutral-800: #29303e; --neutral-700: #384150;
-  --neutral-600: #4a5567; --neutral-400: #9aa5b8; --neutral-300: #d1d8e2;
-  --red: #e74062; --yellow: #f7ad38; --green: #2bbc6c; --green-l: #56d27b;
+  --purple-900:#25214a;--purple-800:#2c2758;--purple-700:#463e8d;
+  --purple-600:#4e46b9;--purple-500:#6966cc;--purple-400:#8888dd;--purple-300:#adafeb;
+  --teal-700:#1a6c68;--teal-600:#12a19b;--teal-500:#2db9b2;--teal-400:#6bdbd6;
+  --neutral-900:#303030;--neutral-800:#29303e;--neutral-700:#384150;
+  --neutral-600:#4a5567;--neutral-400:#9aa5b8;--neutral-300:#d1d8e2;
+  --red:#e74062;--yellow:#f7ad38;--green:#2bbc6c;--green-l:#56d27b;
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--neutral-900);color:white;overflow:hidden;height:100vh;width:100vw;}
 
-* { margin:0; padding:0; box-sizing:border-box; }
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;opacity:0;transform:translateX(60px);transition:opacity .42s cubic-bezier(.4,0,.2,1),transform .42s cubic-bezier(.4,0,.2,1);pointer-events:none;}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:all;}
+.slide.exit{opacity:0;transform:translateX(-60px);}
 
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: var(--neutral-900);
-  color: white;
-  overflow: hidden;
-  height: 100vh; width: 100vw;
-}
+.nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:100;background:rgba(41,48,62,.92);backdrop-filter:blur(14px);padding:9px 16px;border-radius:40px;border:1px solid rgba(255,255,255,.1);}
+.nb{background:none;border:1.5px solid rgba(255,255,255,.2);color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.nb:hover{background:var(--teal-600);border-color:var(--teal-500);}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s;}
+.dot.active{background:var(--teal-500);width:18px;border-radius:4px;}
+.nd{display:flex;gap:5px;align-items:center;}
+.nc{font-size:11px;color:var(--neutral-400);min-width:36px;text-align:center;}
 
-/* ── SLIDES ─────────────────────────────────────────── */
-.slide {
-  position: absolute; top:0; left:0; width:100%; height:100%;
-  display: flex; flex-direction: column;
-  opacity: 0; transform: translateX(60px);
-  transition: opacity 0.42s cubic-bezier(.4,0,.2,1), transform 0.42s cubic-bezier(.4,0,.2,1);
-  pointer-events: none;
-}
-.slide.active  { opacity:1; transform:translateX(0); pointer-events:all; }
-.slide.exit    { opacity:0; transform:translateX(-60px); }
+.sh{padding:28px 56px 0;display:flex;align-items:center;justify-content:space-between;}
+.sb{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 56px 68px;}
+.sf{padding:12px 56px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:rgba(255,255,255,.25);}
 
-/* ── NAV ────────────────────────────────────────────── */
-.nav {
-  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
-  display:flex; align-items:center; gap:10px; z-index:100;
-  background:rgba(41,48,62,0.92); backdrop-filter:blur(14px);
-  padding:9px 16px; border-radius:40px;
-  border:1px solid rgba(255,255,255,0.1);
-}
-.nav-btn {
-  background:none; border:1.5px solid rgba(255,255,255,0.2); color:white;
-  width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:15px;
-  display:flex; align-items:center; justify-content:center; transition:all 0.2s;
-}
-.nav-btn:hover { background:var(--teal-600); border-color:var(--teal-500); }
-.dot {
-  width:6px; height:6px; border-radius:50%;
-  background:rgba(255,255,255,0.2); cursor:pointer; transition:all 0.2s;
-}
-.dot.active { background:var(--teal-500); width:18px; border-radius:4px; }
-.nav-dots { display:flex; gap:5px; align-items:center; }
-.slide-counter { font-size:11px; color:var(--neutral-400); min-width:36px; text-align:center; }
+.logo{display:flex;align-items:center;gap:8px;}
+.ld{width:8px;height:8px;border-radius:50%;}
+.lt{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.stag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:20px;background:rgba(45,185,178,.12);color:var(--teal-400);border:1px solid rgba(45,185,178,.25);}
 
-/* ── LAYOUT ─────────────────────────────────────────── */
-.sh { padding:28px 56px 0; display:flex; align-items:center; justify-content:space-between; }
-.sb { flex:1; display:flex; flex-direction:column; justify-content:center; padding:20px 56px 68px; }
-.sf {
-  padding:12px 56px; display:flex; align-items:center; justify-content:space-between;
-  border-top:1px solid rgba(255,255,255,0.06); font-size:11px; color:rgba(255,255,255,0.25);
-}
+.ey{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-400);margin-bottom:12px;}
+h1{font-size:clamp(32px,4.5vw,56px);font-weight:800;line-height:1.1;}
+h2{font-size:clamp(24px,3vw,40px);font-weight:700;line-height:1.15;}
+h3{font-size:clamp(15px,1.6vw,20px);font-weight:600;line-height:1.3;}
+.sub{font-size:clamp(13px,1.4vw,16px);color:var(--neutral-400);font-weight:400;line-height:1.6;max-width:680px;}
+.gt{background:linear-gradient(135deg,var(--teal-400) 0%,var(--purple-400) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
-/* ── BRAND ──────────────────────────────────────────── */
-.logo { display:flex; align-items:center; gap:8px; }
-.logo-dot { width:8px; height:8px; border-radius:50%; }
-.logo-text { font-size:13px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:rgba(255,255,255,0.6); }
-.stag {
-  font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-  padding:3px 10px; border-radius:20px;
-  background:rgba(45,185,178,0.12); color:var(--teal-400);
-  border:1px solid rgba(45,185,178,0.25);
-}
+.bg-cover{background:radial-gradient(ellipse at 25% 50%,rgba(70,62,141,.55) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(26,108,104,.4) 0%,transparent 55%),var(--neutral-900);}
+.bg-dark{background:var(--neutral-800);}
+.bg-purple{background:radial-gradient(ellipse at 15% 60%,rgba(78,70,185,.35) 0%,transparent 55%),var(--neutral-900);}
+.bg-teal{background:radial-gradient(ellipse at 85% 40%,rgba(26,108,104,.35) 0%,transparent 55%),var(--neutral-900);}
 
-/* ── TYPE ───────────────────────────────────────────── */
-.ey { font-size:11px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--teal-400); margin-bottom:12px; }
-h1  { font-size:clamp(32px,4.5vw,56px); font-weight:800; line-height:1.1; }
-h2  { font-size:clamp(24px,3vw,40px); font-weight:700; line-height:1.15; }
-h3  { font-size:clamp(15px,1.6vw,20px); font-weight:600; line-height:1.3; }
-.sub { font-size:clamp(13px,1.4vw,16px); color:var(--neutral-400); font-weight:400; line-height:1.6; max-width:680px; }
-.gt {
-  background:linear-gradient(135deg,var(--teal-400) 0%,var(--purple-400) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px;transition:border-color .2s;}
+.card:hover{border-color:rgba(45,185,178,.35);}
+.cat{border-top:3px solid var(--teal-500);}
+.cap{border-top:3px solid var(--purple-500);}
+.cay{border-top:3px solid var(--yellow);}
+.car{border-top:3px solid var(--red);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.hs{display:flex;gap:28px;align-items:flex-start;}
 
-/* ── BACKGROUNDS ────────────────────────────────────── */
-.bg-cover {
-  background: radial-gradient(ellipse at 25% 50%,rgba(70,62,141,.55) 0%,transparent 60%),
-              radial-gradient(ellipse at 80% 20%,rgba(26,108,104,.4) 0%,transparent 55%),
-              var(--neutral-900);
-}
-.bg-dark   { background:var(--neutral-800); }
-.bg-purple {
-  background: radial-gradient(ellipse at 15% 60%,rgba(78,70,185,.35) 0%,transparent 55%),
-              var(--neutral-900);
-}
-.bg-teal {
-  background: radial-gradient(ellipse at 85% 40%,rgba(26,108,104,.35) 0%,transparent 55%),
-              var(--neutral-900);
-}
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;}
+.tt{background:rgba(45,185,178,.15);color:var(--teal-400);border:1px solid rgba(45,185,178,.25);}
+.tp{background:rgba(105,102,204,.18);color:var(--purple-300);border:1px solid rgba(105,102,204,.3);}
+.ty{background:rgba(247,173,56,.14);color:var(--yellow);border:1px solid rgba(247,173,56,.28);}
+.tg{background:rgba(43,188,108,.14);color:var(--green-l);border:1px solid rgba(43,188,108,.28);}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
 
-/* ── CARDS ──────────────────────────────────────────── */
-.card {
-  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
-  border-radius:14px; padding:22px; transition:border-color .2s;
-}
-.card:hover { border-color:rgba(45,185,178,.35); }
-.cat { border-top:3px solid var(--teal-500); }
-.cap { border-top:3px solid var(--purple-500); }
-.cay { border-top:3px solid var(--yellow); }
-.car { border-top:3px solid var(--red); }
-.g2  { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.g3  { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
-.hs  { display:flex; gap:28px; align-items:flex-start; }
+.ib{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;}
+.ibt{background:rgba(45,185,178,.14);border:1px solid rgba(45,185,178,.22);}
+.ibp{background:rgba(105,102,204,.14);border:1px solid rgba(105,102,204,.22);}
+.iby{background:rgba(247,173,56,.14);border:1px solid rgba(247,173,56,.22);}
+.ibg{background:rgba(43,188,108,.14);border:1px solid rgba(43,188,108,.22);}
 
-/* ── TAGS ───────────────────────────────────────────── */
-.tag { display:inline-block; font-size:10px; font-weight:600; padding:2px 9px; border-radius:10px; }
-.tt  { background:rgba(45,185,178,.15); color:var(--teal-400); border:1px solid rgba(45,185,178,.25); }
-.tp  { background:rgba(105,102,204,.18); color:var(--purple-300); border:1px solid rgba(105,102,204,.3); }
-.ty  { background:rgba(247,173,56,.14); color:var(--yellow); border:1px solid rgba(247,173,56,.28); }
-.tg  { background:rgba(43,188,108,.14); color:var(--green-l); border:1px solid rgba(43,188,108,.28); }
-.tr  { background:rgba(231,64,98,.14); color:#f08; border:1px solid rgba(231,64,98,.28); }
+.cl{list-style:none;}
+.cl li{padding:6px 0;display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--neutral-300);line-height:1.5;border-bottom:1px solid rgba(255,255,255,.05);}
+.cl li:last-child{border-bottom:none;}
+.cl li::before{content:"›";color:var(--teal-500);font-size:16px;line-height:1.2;flex-shrink:0;}
 
-.chip-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.rq{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:16px;}
+.ql{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;}
+.qt{font-size:13px;font-weight:600;color:white;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.07);}
+.qi{display:flex;align-items:flex-start;gap:7px;padding:5px 0;font-size:12px;color:var(--neutral-300);border-bottom:1px solid rgba(255,255,255,.04);line-height:1.4;}
+.qi:last-child{border-bottom:none;}
+.qd{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
 
-/* ── ICON BOX ───────────────────────────────────────── */
-.ib  { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:16px; }
-.ibt { background:rgba(45,185,178,.14); border:1px solid rgba(45,185,178,.22); }
-.ibp { background:rgba(105,102,204,.14); border:1px solid rgba(105,102,204,.22); }
-.iby { background:rgba(247,173,56,.14); border:1px solid rgba(247,173,56,.22); }
-.ibr { background:rgba(231,64,98,.14); border:1px solid rgba(231,64,98,.22); }
-.ibg { background:rgba(43,188,108,.14); border:1px solid rgba(43,188,108,.22); }
+.pillar-num{font-size:48px;font-weight:800;line-height:1;opacity:.12;position:absolute;top:16px;right:20px;}
 
-/* ── VALUE PILL ─────────────────────────────────────── */
-.vpill {
-  display:inline-flex; align-items:center; gap:7px;
-  background:rgba(45,185,178,.08); border:1px solid rgba(45,185,178,.2);
-  border-radius:8px; padding:8px 14px; font-size:12px; color:var(--neutral-300); line-height:1.5;
-}
-.vpill strong { color:var(--teal-400); font-weight:600; }
-
-/* ── CHECKLIST ──────────────────────────────────────── */
-.cl  { list-style:none; }
-.cl li {
-  padding:6px 0; display:flex; align-items:flex-start; gap:8px;
-  font-size:13px; color:var(--neutral-300); line-height:1.5;
-  border-bottom:1px solid rgba(255,255,255,.05);
-}
-.cl li:last-child { border-bottom:none; }
-.cl li::before { content:"›"; color:var(--teal-500); font-size:16px; line-height:1.2; flex-shrink:0; }
-
-/* ── PROBLEM STAT ────────────────────────────────────── */
-.pstat {
-  text-align:center; padding:24px 16px;
-  background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); border-radius:14px;
-}
-.pstat-num { font-size:clamp(32px,4vw,50px); font-weight:800; line-height:1; margin-bottom:6px; }
-.pstat-lbl { font-size:12px; color:var(--neutral-400); line-height:1.4; }
-
-/* ── QUARTER CARD ────────────────────────────────────── */
-.rq { background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.07); border-radius:11px; padding:16px; }
-.ql { font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px; }
-.qtheme { font-size:13px; font-weight:600; color:white; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.07); }
-.qi { display:flex; align-items:flex-start; gap:7px; padding:5px 0; font-size:12px; color:var(--neutral-300); border-bottom:1px solid rgba(255,255,255,.04); line-height:1.4; }
-.qi:last-child { border-bottom:none; }
-.qi-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:4px; }
-
-/* ── COVER SPECIFIC ─────────────────────────────────── */
-.pb-row { display:flex; align-items:center; gap:14px; margin-bottom:40px; }
-.pbadge { font-size:11px; font-weight:600; letter-spacing:.09em; padding:5px 14px; border-radius:20px; text-transform:uppercase; }
-.pbs { background:linear-gradient(135deg,rgba(78,70,185,.3),rgba(26,108,104,.3)); border:1px solid rgba(255,255,255,.14); color:white; }
-.meta-row { display:flex; gap:24px; margin-top:36px; }
-.mi { display:flex; flex-direction:column; gap:3px; }
-.ml { font-size:10px; color:rgba(255,255,255,.28); font-weight:500; letter-spacing:.1em; text-transform:uppercase; }
-.mv { font-size:13px; color:rgba(255,255,255,.6); font-weight:500; }
-
-/* ── DIVIDER ─────────────────────────────────────────── */
-.divider { height:1px; background:rgba(255,255,255,.07); margin:16px 0; }
+.proof-box{padding:18px 22px;background:rgba(43,188,108,.07);border:1px solid rgba(43,188,108,.2);border-radius:12px;}
 </style>
 </head>
 <body>
 
-<!-- ══ SLIDE 1: COVER ══════════════════════════════════════════════════════ -->
+<!-- ══ S1: COVER ══════════════════════════════════════════════════════════ -->
 <div class="slide bg-cover" id="s1">
-  <div class="sb" style="justify-content:center; padding-top:40px;">
-    <div class="pb-row">
-      <span class="pbadge pbs">SenseOn</span>
+  <div class="sb" style="justify-content:center;padding-top:40px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:36px;">
+      <div class="ld" style="background:var(--teal-500);width:10px;height:10px;"></div>
+      <div class="ld" style="background:var(--red);width:10px;height:10px;"></div>
+      <div class="ld" style="background:var(--yellow);width:10px;height:10px;"></div>
+      <span style="font-size:18px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;">SenseOn</span>
     </div>
     <div class="ey">2026 Product Roadmap</div>
-    <h1 style="max-width:780px; margin-bottom:20px;">
-      The Platform Built for<br><span class="gt">Security That Thinks</span>
+    <h1 style="max-width:820px;margin-bottom:20px;">
+      Launch the<br><span class="gt">Autonomous Security Era</span>
     </h1>
-    <p class="sub" style="margin-bottom:36px; max-width:600px;">
-      Where we're taking the SenseOn platform in 2026 — what we're building, why it matters, and what it means for your security operations.
+    <p class="sub" style="margin-bottom:36px;max-width:600px;">
+      We exist to liberate security teams from complexity so they can focus on what matters. This is how we're doing it in 2026.
     </p>
-    <div class="meta-row">
-      <div class="mi"><span class="ml">Version</span><span class="mv">2026 Roadmap</span></div>
-      <div class="mi"><span class="ml">Last updated</span><span class="mv">February 2026</span></div>
+    <div style="display:flex;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <span style="font-size:10px;color:rgba(255,255,255,.28);font-weight:500;letter-spacing:.1em;text-transform:uppercase;">Year</span>
+        <span style="font-size:13px;color:rgba(255,255,255,.6);font-weight:500;">FY2026</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <span style="font-size:10px;color:rgba(255,255,255,.28);font-weight:500;letter-spacing:.1em;text-transform:uppercase;">Updated</span>
+        <span style="font-size:13px;color:rgba(255,255,255,.6);font-weight:500;">February 2026</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <span style="font-size:10px;color:rgba(255,255,255,.28);font-weight:500;letter-spacing:.1em;text-transform:uppercase;">Contact</span>
+        <span style="font-size:13px;color:rgba(255,255,255,.6);font-weight:500;">hello@senseon.io</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ SLIDE 2: THE PROBLEM ════════════════════════════════════════════════ -->
+<!-- ══ S2: THE PROBLEM ════════════════════════════════════════════════════ -->
 <div class="slide bg-dark" id="s2">
   <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
+    <div class="logo"><div class="ld" style="background:var(--teal-500)"></div><div class="ld" style="background:var(--red)"></div><div class="ld" style="background:var(--yellow)"></div><span class="lt">SenseOn</span></div>
     <span class="stag">Why We Exist</span>
   </div>
   <div class="sb">
     <div class="ey">The Problem We're Solving</div>
-    <h2 style="margin-bottom:24px;">Security Teams Are <span class="gt">Losing the Battle</span><br>Against Complexity</h2>
-
-    <div class="g3" style="margin-bottom:24px;">
-      <div class="pstat">
-        <div class="pstat-num" style="color:var(--red);">200+</div>
-        <div class="pstat-lbl">Days average attacker dwell time before detection</div>
-      </div>
-      <div class="pstat">
-        <div class="pstat-num" style="color:var(--yellow);">72%</div>
-        <div class="pstat-lbl">Of security alerts go uninvestigated due to volume</div>
-      </div>
-      <div class="pstat">
-        <div class="pstat-num" style="color:var(--purple-400);">11+</div>
-        <div class="pstat-lbl">Disconnected security tools the average enterprise runs</div>
-      </div>
-    </div>
-
-    <div class="hs" style="gap:20px; align-items:stretch;">
-      <div style="flex:1; padding:18px 22px; background:rgba(231,64,98,.07); border:1px solid rgba(231,64,98,.2); border-radius:12px;">
-        <div style="font-size:12px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;">The old way</div>
-        <ul class="cl" style="font-size:12.5px;">
-          <li>Analysts manually triaging hundreds of alerts daily</li>
-          <li>Data siloed across EDR, SIEM, NDR, and cloud tools</li>
-          <li>Expensive SIEM licences that scale poorly with data volume</li>
-          <li>Weeks to onboard a new data source</li>
-        </ul>
-      </div>
-      <div style="flex:1; padding:18px 22px; background:rgba(45,185,178,.07); border:1px solid rgba(45,185,178,.2); border-radius:12px;">
-        <div style="font-size:12px; font-weight:700; color:var(--teal-400); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;">The SenseOn way</div>
-        <ul class="cl" style="font-size:12.5px;">
-          <li>AI investigates and closes cases automatically</li>
-          <li>Every signal — endpoint, network, log, cloud — in one platform</li>
-          <li>Data lake architecture at a fraction of SIEM cost</li>
-          <li>Any log source onboarded in hours, not weeks</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
-</div>
-
-<!-- ══ SLIDE 3: 2026 VISION ════════════════════════════════════════════════ -->
-<div class="slide bg-purple" id="s3">
-  <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
-    <span class="stag">2026 Vision</span>
-  </div>
-  <div class="sb">
-    <div class="ey">Where We're Heading</div>
-    <h2 style="margin-bottom:8px;">Four Pillars.<br><span class="gt">One Autonomous Platform.</span></h2>
-    <p class="sub" style="font-size:14px; margin-bottom:28px;">Everything we're building in 2026 serves one goal: giving your security team an AI-native platform that detects, investigates, and responds — without the toil.</p>
-
-    <div class="g2" style="gap:16px;">
-      <div class="card cat" style="display:flex; gap:16px; align-items:flex-start;">
-        <div class="ib ibt" style="margin-bottom:0; flex-shrink:0;">🤖</div>
-        <div>
-          <h3 style="font-size:16px; margin-bottom:6px;">Autonomous Security Operations</h3>
-          <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">AI that investigates alerts, builds cases, and closes incidents — so your analysts focus on what only humans can do.</p>
-        </div>
-      </div>
-      <div class="card cap" style="display:flex; gap:16px; align-items:flex-start;">
-        <div class="ib ibp" style="margin-bottom:0; flex-shrink:0;">📡</div>
-        <div>
-          <h3 style="font-size:16px; margin-bottom:6px;">Universal Data Platform</h3>
-          <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">Ingest any log, from any source, and make it searchable, detectable, and actionable — at a fraction of SIEM cost.</p>
-        </div>
-      </div>
-      <div class="card cay" style="display:flex; gap:16px; align-items:flex-start;">
-        <div class="ib iby" style="margin-bottom:0; flex-shrink:0;">🛡️</div>
-        <div>
-          <h3 style="font-size:16px; margin-bottom:6px;">Complete Visibility</h3>
-          <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">Richer endpoint telemetry, deeper network intelligence, and unified coverage across your entire estate.</p>
-        </div>
-      </div>
-      <div class="card car" style="display:flex; gap:16px; align-items:flex-start;">
-        <div class="ib ibr" style="margin-bottom:0; flex-shrink:0;">🔍</div>
-        <div>
-          <h3 style="font-size:16px; margin-bottom:6px;">Analyst-First Experience</h3>
-          <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">AI-assisted threat hunting, rich analytics, and onboarding so smooth your team gets value from day one.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
-</div>
-
-<!-- ══ SLIDE 4: AUTONOMOUS SOC ═════════════════════════════════════════════ -->
-<div class="slide bg-teal" id="s4">
-  <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
-    <span class="stag">Pillar 1 · Autonomous Security Operations</span>
-  </div>
-  <div class="sb">
-    <div class="ey">Pillar 1 — Autonomous Security Operations</div>
-    <h2 style="margin-bottom:6px;">Your AI Analyst.<br><span class="gt">Always On. Never Overwhelmed.</span></h2>
-    <p class="sub" style="font-size:13px; margin-bottom:22px;">
-      We're embedding AI across the entire investigation lifecycle — from the moment an alert fires to the moment a case is closed.
+    <h2 style="margin-bottom:8px;">In the AI Era, Data Is Infinite.<br><span class="gt">But Clarity Is Scarce.</span></h2>
+    <p class="sub" style="font-size:13px;margin-bottom:24px;">
+      Security teams are drowning — not because they lack tools, but because those tools create more noise than signal. Analysts spend their days triaging alerts that shouldn't reach them. Leaders can't see the risk picture clearly enough to act with confidence.
     </p>
 
-    <div class="g2" style="gap:16px; margin-bottom:16px;">
-      <div class="card cat" style="padding:20px;">
-        <div style="font-size:16px; font-weight:700; margin-bottom:4px;">Resolve AI</div>
-        <div style="font-size:11px; color:var(--teal-400); font-weight:600; margin-bottom:12px;">Shipping 2026</div>
-        <ul class="cl" style="font-size:12.5px; margin-bottom:14px;">
-          <li>Automatically investigates every alert — not just the obvious ones</li>
-          <li>Reviews case history, asset context, and detection patterns</li>
-          <li>Delivers a structured verdict: confirmed, likely benign, or needs review</li>
-          <li>Evolves to close cases end-to-end with zero analyst input</li>
+    <div class="hs" style="gap:20px;margin-bottom:20px;">
+      <div style="flex:1;padding:20px 22px;background:rgba(231,64,98,.07);border:1px solid rgba(231,64,98,.2);border-radius:12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">The old way</div>
+        <ul class="cl" style="font-size:12.5px;">
+          <li>Analysts manually triaging alert queues that never empty</li>
+          <li>Security data siloed across EDR, SIEM, NDR, and cloud tools</li>
+          <li>SIEM licensing that punishes you for collecting more data</li>
+          <li>Investigations that take days because context is scattered</li>
+          <li>Security reporting that takes weeks to produce for the board</li>
         </ul>
-        <div class="vpill"><strong>Analyst impact:</strong>&nbsp;Drastically fewer alerts requiring manual triage</div>
       </div>
-      <div class="card cap" style="padding:20px;">
-        <div style="font-size:16px; font-weight:700; margin-bottom:4px;">SenseAI</div>
-        <div style="font-size:11px; color:var(--purple-300); font-weight:600; margin-bottom:12px;">H2 2026</div>
-        <ul class="cl" style="font-size:12.5px; margin-bottom:14px;">
-          <li>An AI companion embedded throughout the whole platform</li>
-          <li>Explains detections in plain language — no query expertise needed</li>
-          <li>Suggests next investigative steps in context</li>
-          <li>Write threat hunting queries in natural language</li>
+      <div style="flex:1;padding:20px 22px;background:rgba(45,185,178,.07);border:1px solid rgba(45,185,178,.2);border-radius:12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--teal-400);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">The SenseOn way</div>
+        <ul class="cl" style="font-size:12.5px;">
+          <li>AI agents investigate and close cases — analysts review exceptions</li>
+          <li>One Intelligence Data Fabric unifying every signal in your environment</li>
+          <li>Ingest everything you need, not just what you can afford</li>
+          <li>Evidence Packs that assemble the full case picture automatically</li>
+          <li>Intelligence that flows from the SOC to the C-suite in real time</li>
         </ul>
-        <div class="vpill"><strong>Analyst impact:</strong>&nbsp;Junior analysts perform like seniors from day one</div>
       </div>
     </div>
 
-    <div style="padding:14px 18px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:10px; font-size:13px; color:var(--neutral-300); line-height:1.6;">
-      <strong style="color:white;">The outcome:</strong> Your team stops drowning in alerts and starts focusing on adversary behaviour — while the AI handles the volume.
+    <div class="proof-box">
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div style="flex-shrink:0;text-align:center;">
+          <div style="font-size:42px;font-weight:800;color:var(--green-l);line-height:1;">10x</div>
+          <div style="font-size:10px;color:var(--neutral-400);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">efficiency gain</div>
+        </div>
+        <div style="width:1px;height:40px;background:rgba(255,255,255,.1);flex-shrink:0;"></div>
+        <div style="font-size:13px;color:var(--neutral-300);line-height:1.6;">
+          One customer reduced their daily security cases requiring analyst attention from <strong style="color:white;">40 cases per day to 40 cases per month</strong> after deploying SenseOn's autonomous investigation. The same team, 10x the capacity.
+        </div>
+      </div>
     </div>
   </div>
   <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
 </div>
 
-<!-- ══ SLIDE 5: UNIVERSAL DATA PLATFORM ═══════════════════════════════════ -->
-<div class="slide bg-dark" id="s5">
+<!-- ══ S3: THREE PILLARS ══════════════════════════════════════════════════ -->
+<div class="slide bg-purple" id="s3">
   <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
-    <span class="stag">Pillar 2 · Universal Data Platform</span>
+    <div class="logo"><div class="ld" style="background:var(--teal-500)"></div><div class="ld" style="background:var(--red)"></div><div class="ld" style="background:var(--yellow)"></div><span class="lt">SenseOn</span></div>
+    <span class="stag">2026 Strategy</span>
   </div>
   <div class="sb">
-    <div class="ey">Pillar 2 — Universal Data Platform</div>
-    <h2 style="margin-bottom:6px;">Replace Your SIEM.<br><span class="gt">Keep All Your Data.</span></h2>
-    <p class="sub" style="font-size:13px; margin-bottom:22px;">
-      Log ingestion shouldn't be a licensing problem. In 2026 we're making it possible to ingest everything — OS, network, cloud, applications — normalise it automatically, and query it instantly.
+    <div class="ey">How We'll Get There</div>
+    <h2 style="margin-bottom:8px;">Three Strategic Pillars.<br><span class="gt">One Autonomous Platform.</span></h2>
+    <p class="sub" style="font-size:13px;margin-bottom:28px;">
+      Everything we're building in 2026 serves one goal: transforming security data into actionable intelligence — and progressively automating everything that can be automated, so humans focus on what only humans can do.
+    </p>
+
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="card cat" style="display:flex;gap:20px;align-items:center;">
+        <div style="font-size:36px;font-weight:800;color:var(--teal-500);opacity:.3;flex-shrink:0;width:48px;text-align:center;">1</div>
+        <div>
+          <h3 style="font-size:17px;margin-bottom:5px;">Establish the Central Intelligence Data Fabric</h3>
+          <p style="font-size:13px;color:var(--neutral-400);line-height:1.5;">Become the system of record for your security data. Ingest any source, normalise it automatically, make it searchable, detectable, and actionable — all in one place.</p>
+        </div>
+        <div class="chip-row" style="flex-shrink:0;flex-direction:column;align-items:flex-end;margin-top:0;">
+          <span class="tag tt">Data Platform</span>
+          <span class="tag tp" style="margin-top:4px;">Log Ingestion</span>
+        </div>
+      </div>
+
+      <div class="card cap" style="display:flex;gap:20px;align-items:center;">
+        <div style="font-size:36px;font-weight:800;color:var(--purple-400);opacity:.3;flex-shrink:0;width:48px;text-align:center;">2</div>
+        <div>
+          <h3 style="font-size:17px;margin-bottom:5px;">Power the Modern Security Operation with Human-AI Teaming</h3>
+          <p style="font-size:13px;color:var(--neutral-400);line-height:1.5;">Deploy AI agents that investigate, triage, and close cases. Your analysts handle the exceptions, the edge cases, and the strategic decisions — not the volume.</p>
+        </div>
+        <div class="chip-row" style="flex-shrink:0;flex-direction:column;align-items:flex-end;margin-top:0;">
+          <span class="tag tt">Resolve AI</span>
+          <span class="tag tp" style="margin-top:4px;">Agentic SOC</span>
+        </div>
+      </div>
+
+      <div class="card cay" style="display:flex;gap:20px;align-items:center;">
+        <div style="font-size:36px;font-weight:800;color:var(--yellow);opacity:.3;flex-shrink:0;width:48px;text-align:center;">3</div>
+        <div>
+          <h3 style="font-size:17px;margin-bottom:5px;">Extend Intelligence from the SOC to the C-Suite</h3>
+          <p style="font-size:13px;color:var(--neutral-400);line-height:1.5;">Security intelligence shouldn't stop at the analyst's desk. In 2026 we're building the dashboards, evidence packs, and compliance outputs that bring security clarity to every stakeholder.</p>
+        </div>
+        <div class="chip-row" style="flex-shrink:0;flex-direction:column;align-items:flex-end;margin-top:0;">
+          <span class="tag ty">Reveal</span>
+          <span class="tag tg" style="margin-top:4px;">Compliance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
+</div>
+
+<!-- ══ S4: AGENTIC PLATFORM ════════════════════════════════════════════════ -->
+<div class="slide bg-teal" id="s4">
+  <div class="sh">
+    <div class="logo"><div class="ld" style="background:var(--teal-500)"></div><div class="ld" style="background:var(--red)"></div><div class="ld" style="background:var(--yellow)"></div><span class="lt">SenseOn</span></div>
+    <span class="stag">Pillar 2 · Human-AI Teaming</span>
+  </div>
+  <div class="sb">
+    <div class="ey">The AI Agentic Platform</div>
+    <h2 style="margin-bottom:6px;">AI That Investigates.<br><span class="gt">Evidence You Can Trust.</span></h2>
+    <p class="sub" style="font-size:13px;margin-bottom:20px;">
+      The most important thing about our AI isn't that it's fast — it's that it's <em style="color:white;">right</em>. Every AI action in SenseOn produces an auditable Evidence Pack. Every conclusion can be traced. No black boxes.
+    </p>
+
+    <div class="g2" style="gap:16px;margin-bottom:16px;">
+      <div class="card" style="border-top:3px solid var(--teal-500);padding:20px;">
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:white;">Investigation Orchestrator</div>
+        <div style="font-size:11px;color:var(--teal-400);font-weight:600;margin-bottom:12px;">Shipping Q1 2026</div>
+        <ul class="cl" style="font-size:12.5px;margin-bottom:12px;">
+          <li>Agentic investigation that maintains state across long-running cases</li>
+          <li>Assembles Evidence Packs — auditable, traceable, explainable</li>
+          <li>Picks up where it left off — no context lost between sessions</li>
+          <li>Human review gates for high-impact decisions</li>
+        </ul>
+        <div style="padding:10px 14px;background:rgba(45,185,178,.1);border-radius:8px;font-size:12px;color:var(--neutral-300);">
+          <strong style="color:var(--teal-400);">Why it matters:</strong> Investigations that took your analysts hours are completed automatically — with a full evidence trail that stands up to audit.
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--purple-500);padding:20px;">
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:white;">Resolve AI</div>
+        <div style="font-size:11px;color:var(--purple-300);font-weight:600;margin-bottom:12px;">Expanding through 2026</div>
+        <ul class="cl" style="font-size:12.5px;margin-bottom:12px;">
+          <li>Trained on 30 million+ real security cases</li>
+          <li>Auto-closes cases with a better-than-human false negative rate</li>
+          <li>Explainable verdict for every closure — not a black box</li>
+          <li>Targets 80%+ of cases closed without analyst touch</li>
+        </ul>
+        <div style="padding:10px 14px;background:rgba(105,102,204,.1);border-radius:8px;font-size:12px;color:var(--neutral-300);">
+          <strong style="color:var(--purple-300);">Why it matters:</strong> Your analysts stop handling volume and start handling adversaries. The cases that reach them are the ones that genuinely need them.
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:12px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;font-size:12.5px;color:var(--neutral-400);line-height:1.6;">
+      <strong style="color:white;">Our commitment to AI safety:</strong> We ship no expansion of agent autonomy without passing our internal evaluation benchmarks. Hallucinated evidence rate target = zero. Every AI decision is auditable. Rollback available within minutes.
+    </div>
+  </div>
+  <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
+</div>
+
+<!-- ══ S5: INTELLIGENCE DATA FABRIC ═══════════════════════════════════════ -->
+<div class="slide bg-dark" id="s5">
+  <div class="sh">
+    <div class="logo"><div class="ld" style="background:var(--teal-500)"></div><div class="ld" style="background:var(--red)"></div><div class="ld" style="background:var(--yellow)"></div><span class="lt">SenseOn</span></div>
+    <span class="stag">Pillar 1 · Intelligence Data Fabric</span>
+  </div>
+  <div class="sb">
+    <div class="ey">The Intelligence Data Fabric</div>
+    <h2 style="margin-bottom:6px;">Your System of Record<br><span class="gt">for All Security Data</span></h2>
+    <p class="sub" style="font-size:13px;margin-bottom:20px;">
+      The most capable AI is only as good as the data it works with. In 2026 we're completing the foundation: a Security Data Lakehouse that ingests any source, normalises it automatically, and makes it available for detection, investigation, and compliance reporting.
     </p>
 
     <div class="hs" style="gap:20px;">
-      <div style="flex:1.1;">
-        <div style="display:flex; flex-direction:column; gap:10px;">
-          <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:700; color:white; margin-bottom:6px;">Any source. Any format.</div>
-            <div style="font-size:12.5px; color:var(--neutral-400); line-height:1.5;">Windows Events, Linux Syslog, Palo Alto, CrowdStrike, AWS CloudTrail, Azure AD, custom applications — all ingested through a single, lightweight collector. No complex pipelines.</div>
-          </div>
-          <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:700; color:white; margin-bottom:6px;">Automatic normalisation to OCSF</div>
-            <div style="font-size:12.5px; color:var(--neutral-400); line-height:1.5;">Our Log Collector Manager automatically classifies and normalises your logs to the Open Cybersecurity Schema Framework — giving you a consistent schema across every data source.</div>
-          </div>
-          <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:700; color:white; margin-bottom:6px;">Detect threats on your logs</div>
-            <div style="font-size:12.5px; color:var(--neutral-400); line-height:1.5;">Run detection rules directly against ingested log data. Surface threats hiding in firewall logs, cloud audit trails, and application events that your current tooling misses entirely.</div>
-          </div>
-          <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:700; color:white; margin-bottom:6px;">Historical investigation — instantly</div>
-            <div style="font-size:12.5px; color:var(--neutral-400); line-height:1.5;">Query across months of archived log data on demand. When an incident happens, look back across everything — not just what your retention budget allowed.</div>
-          </div>
+      <div style="flex:1.1;display:flex;flex-direction:column;gap:10px;">
+        <div class="card" style="padding:16px 20px;">
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:6px;">Universal Ingestion — Any Source</div>
+          <div style="font-size:12.5px;color:var(--neutral-400);line-height:1.5;">OS, network, cloud, application, and third-party security tools — all flowing through a single lightweight collector. Automatic classification and normalisation to the Open Cybersecurity Schema Framework (OCSF).</div>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:6px;">Detect Threats on Your Logs</div>
+          <div style="font-size:12.5px;color:var(--neutral-400);line-height:1.5;">Run the full Detection Fabric against every log you ingest — not just endpoint and network. Threats hiding in firewall logs, cloud audit trails, and application events surface automatically.</div>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:6px;">Historical Investigation On Demand</div>
+          <div style="font-size:12.5px;color:var(--neutral-400);line-height:1.5;">Query across your full archive instantly when an incident occurs. No more limitations on how far back you can look — just ask the question.</div>
+        </div>
+        <div class="card" style="padding:16px 20px;border-left:2px solid var(--yellow);">
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:6px;">DORA &amp; NIS2 Compliance Module <span style="font-size:11px;color:var(--yellow);font-weight:600;"> — Q3 2026</span></div>
+          <div style="font-size:12.5px;color:var(--neutral-400);line-height:1.5;">Pre-packaged evidence outputs for DORA and NIS2 obligations. Compliance reporting that writes itself from the data already in your fabric.</div>
         </div>
       </div>
 
-      <div style="flex:.9; display:flex; flex-direction:column; gap:14px;">
-        <div style="padding:20px; background:rgba(43,188,108,.07); border:1px solid rgba(43,188,108,.2); border-radius:12px; text-align:center;">
-          <div style="font-size:40px; font-weight:800; color:var(--green-l); line-height:1; margin-bottom:4px;">~80%</div>
-          <div style="font-size:12px; color:var(--neutral-400);">lower cost vs traditional SIEM<br>for the same log volume</div>
+      <div style="flex:.9;display:flex;flex-direction:column;gap:14px;">
+        <div style="padding:20px;background:rgba(43,188,108,.07);border:1px solid rgba(43,188,108,.2);border-radius:12px;text-align:center;">
+          <div style="font-size:38px;font-weight:800;color:var(--green-l);line-height:1;margin-bottom:4px;">~80%</div>
+          <div style="font-size:12px;color:var(--neutral-400);">lower cost vs traditional SIEM<br>for the same log volume</div>
         </div>
-        <div style="padding:20px; background:rgba(45,185,178,.07); border:1px solid rgba(45,185,178,.2); border-radius:12px; text-align:center;">
-          <div style="font-size:40px; font-weight:800; color:var(--teal-400); line-height:1; margin-bottom:4px;">Hours</div>
-          <div style="font-size:12px; color:var(--neutral-400);">to onboard a new log source,<br>not weeks</div>
+        <div style="padding:20px;background:rgba(45,185,178,.07);border:1px solid rgba(45,185,178,.2);border-radius:12px;text-align:center;">
+          <div style="font-size:38px;font-weight:800;color:var(--teal-400);line-height:1;margin-bottom:4px;">Hours</div>
+          <div style="font-size:12px;color:var(--neutral-400);">from new log source to first<br>detection firing against it</div>
         </div>
-        <div style="padding:14px 18px; background:rgba(105,102,204,.07); border:1px solid rgba(105,102,204,.2); border-radius:10px;">
-          <div style="font-size:11px; font-weight:700; color:var(--purple-300); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Also shipping in 2026</div>
-          <div style="font-size:12px; color:var(--neutral-300); line-height:1.6;">Regulatory-grade immutable log storage (WORM) for customers with compliance requirements — SOC 2, ISO 27001, and GDPR data retention obligations.</div>
+        <div style="padding:16px 18px;background:rgba(105,102,204,.07);border:1px solid rgba(105,102,204,.2);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--purple-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Also in 2026</div>
+          <div style="font-size:12px;color:var(--neutral-300);line-height:1.6;">Regulatory-grade immutable log storage (WORM) for organisations with strict retention and compliance obligations — SOC 2, ISO 27001, GDPR.</div>
+        </div>
+        <div style="padding:16px 18px;background:rgba(247,173,56,.07);border:1px solid rgba(247,173,56,.2);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--yellow);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Usage-Based Pricing</div>
+          <div style="font-size:12px;color:var(--neutral-300);line-height:1.6;">Flex Intelligence Credits — consume what you need, when you need it. No more SIEM-style licensing that punishes data collection.</div>
         </div>
       </div>
     </div>
@@ -401,51 +337,51 @@ h3  { font-size:clamp(15px,1.6vw,20px); font-weight:600; line-height:1.3; }
   <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
 </div>
 
-<!-- ══ SLIDE 6: COMPLETE VISIBILITY ═══════════════════════════════════════ -->
+<!-- ══ S6: SOC TO C-SUITE ═════════════════════════════════════════════════ -->
 <div class="slide bg-purple" id="s6">
   <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
-    <span class="stag">Pillar 3 · Complete Visibility</span>
+    <div class="logo"><div class="ld" style="background:var(--teal-500)"></div><div class="ld" style="background:var(--red)"></div><div class="ld" style="background:var(--yellow)"></div><span class="lt">SenseOn</span></div>
+    <span class="stag">Pillar 3 · SOC to C-Suite</span>
   </div>
   <div class="sb">
-    <div class="ey">Pillar 3 — Complete Visibility</div>
-    <h2 style="margin-bottom:6px;">See Everything.<br><span class="gt">Miss Nothing.</span></h2>
-    <p class="sub" style="font-size:13px; margin-bottom:22px;">
-      Attackers hide in the gaps between tools. In 2026 we're closing those gaps — richer endpoint telemetry, deeper process visibility, and stronger device control across every asset.
+    <div class="ey">Extend Intelligence to the C-Suite</div>
+    <h2 style="margin-bottom:6px;">Security Clarity<br><span class="gt">For Every Stakeholder</span></h2>
+    <p class="sub" style="font-size:13px;margin-bottom:22px;">
+      Security intelligence that stays in the SOC isn't delivering full value. In 2026 we're building the visibility layer that connects analysts, security leaders, and the board — with consistent, trustworthy data flowing to all of them.
     </p>
 
     <div class="g2" style="gap:16px;">
       <div>
-        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--teal-400); margin-bottom:14px;">Endpoint Detection & Response</div>
-        <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-400);margin-bottom:14px;">For Analysts</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
           <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:600; margin-bottom:6px;">Richer Process & Event Telemetry</div>
-            <div style="font-size:12px; color:var(--neutral-400); line-height:1.5;">Extended telemetry collection from Windows endpoints gives analysts deeper visibility into process execution, file activity, and network connections — the signals that reveal sophisticated attacker behaviour.</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Redesigned Hunt Lab</div>
+            <div style="font-size:12px;color:var(--neutral-400);line-height:1.5;">Rebuilt threat hunting experience — simpler for everyday use, deeper for expert analysts. AI assistant writes, explains, and optimises queries. Describe what you're looking for in plain language.</div>
           </div>
           <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:600; margin-bottom:6px;">USB Device Control</div>
-            <div style="font-size:12px; color:var(--neutral-400); line-height:1.5;">Enforce USB device policy across your entire estate. Block, monitor, or audit removable media — a critical control for insider threat and data exfiltration scenarios.</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Evidence Packs</div>
+            <div style="font-size:12px;color:var(--neutral-400);line-height:1.5;">Every AI-driven investigation produces a structured Evidence Pack — a complete, auditable case record that's ready for escalation, handover, or compliance reporting.</div>
           </div>
           <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:600; margin-bottom:6px;">Antivirus Integration</div>
-            <div style="font-size:12px; color:var(--neutral-400); line-height:1.5;">Deep AV engine integration brings real-time malware detection directly into the SenseOn agent — no additional tooling required.</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Self-Serve Onboarding</div>
+            <div style="font-size:12px;color:var(--neutral-400);line-height:1.5;">Add new data sources directly from the platform. First detection firing in hours — not weeks of professional services engagement.</div>
           </div>
         </div>
       </div>
       <div>
-        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--purple-300); margin-bottom:14px;">Network Detection & Response</div>
-        <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--purple-300);margin-bottom:14px;">For Security Leaders &amp; the Board</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
           <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:600; margin-bottom:6px;">Real-Time Traffic Analysis</div>
-            <div style="font-size:12px; color:var(--neutral-400); line-height:1.5;">Zero-packet-drop network analysis detects lateral movement, C2 communication, and data exfiltration at wire speed — without a dedicated network security appliance.</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Reveal — Native Analytics Platform</div>
+            <div style="font-size:12px;color:var(--neutral-400);line-height:1.5;">Interactive dashboards across all telemetry — telemetry coverage, detection health, case throughput, and team performance. Customisable security posture views for leadership.</div>
           </div>
           <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:600; margin-bottom:6px;">Behavioural Anomaly Detection</div>
-            <div style="font-size:12px; color:var(--neutral-400); line-height:1.5;">Our proprietary ML-based network analysis builds a baseline of normal behaviour for every asset and surfaces deviations that signature-based tools miss entirely.</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px;">DORA &amp; NIS2 Evidence Outputs</div>
+            <div style="font-size:12px;color:var(--neutral-400);line-height:1.5;">Pre-packaged compliance evidence that emerges naturally from your security operations data. Respond to auditor requests in minutes, not days.</div>
           </div>
           <div class="card" style="padding:16px 20px;">
-            <div style="font-size:13px; font-weight:600; margin-bottom:6px;">Cross-Platform Coverage</div>
-            <div style="font-size:12px; color:var(--neutral-400); line-height:1.5;">Windows, macOS, and Linux. Physical, virtual, and cloud workloads. One agent, consistent telemetry, everywhere you operate.</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Board-Ready Reporting</div>
+            <div style="font-size:12px;color:var(--neutral-400);line-height:1.5;">Outcome scorecards that translate security operations data into business risk language — for CISOs who need to communicate risk, not just incidents.</div>
           </div>
         </div>
       </div>
@@ -454,160 +390,109 @@ h3  { font-size:clamp(15px,1.6vw,20px); font-weight:600; line-height:1.3; }
   <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
 </div>
 
-<!-- ══ SLIDE 7: ANALYST EXPERIENCE ═══════════════════════════════════════ -->
+<!-- ══ S7: TIMELINE ═══════════════════════════════════════════════════════ -->
 <div class="slide bg-teal" id="s7">
   <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
-    <span class="stag">Pillar 4 · Analyst-First Experience</span>
-  </div>
-  <div class="sb">
-    <div class="ey">Pillar 4 — Analyst-First Experience</div>
-    <h2 style="margin-bottom:6px;">Powerful Tools.<br><span class="gt">Without the Learning Curve.</span></h2>
-    <p class="sub" style="font-size:13px; margin-bottom:22px;">
-      The best security platform is one your team actually uses. In 2026 we're making every part of SenseOn faster to learn, faster to use, and smarter in your analysts' hands.
-    </p>
-
-    <div class="g3" style="gap:16px;">
-      <div class="card cat" style="padding:20px;">
-        <div class="ib ibt" style="width:42px; height:42px; font-size:18px; margin-bottom:14px;">🔍</div>
-        <h3 style="font-size:15px; margin-bottom:8px;">Redesigned Hunt Lab</h3>
-        <ul class="cl" style="font-size:12px; margin-bottom:12px;">
-          <li>Rebuilt from the ground up for clarity</li>
-          <li>AI assistant writes and explains queries</li>
-          <li>Natural language — describe what you're looking for</li>
-          <li>Saved hunts, scheduled execution, shared playbooks</li>
-        </ul>
-        <div class="chip-row"><span class="tag tt">AI-Powered</span><span class="tag tp">Q1–Q2</span></div>
-      </div>
-      <div class="card cap" style="padding:20px;">
-        <div class="ib ibp" style="width:42px; height:42px; font-size:18px; margin-bottom:14px;">📊</div>
-        <h3 style="font-size:15px; margin-bottom:8px;">Rich Platform Analytics</h3>
-        <ul class="cl" style="font-size:12px; margin-bottom:12px;">
-          <li>Interactive dashboards across all telemetry sources</li>
-          <li>Telemetry coverage and data health visibility</li>
-          <li>Executive-ready security posture views</li>
-          <li>Customisable to your organisation's priorities</li>
-        </ul>
-        <div class="chip-row"><span class="tag tp">Natively built</span><span class="tag tt">Q3</span></div>
-      </div>
-      <div class="card cay" style="padding:20px;">
-        <div class="ib iby" style="width:42px; height:42px; font-size:18px; margin-bottom:14px;">🚀</div>
-        <h3 style="font-size:15px; margin-bottom:8px;">Self-Serve Onboarding</h3>
-        <ul class="cl" style="font-size:12px; margin-bottom:12px;">
-          <li>Add new log sources directly from the UI</li>
-          <li>Guided first-use flows for new administrators</li>
-          <li>Zero-touch customer activation by Q4</li>
-          <li>Time to first detection measurable in hours</li>
-        </ul>
-        <div class="chip-row"><span class="tag ty">Q2–Q4</span><span class="tag tg">Self-serve</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
-</div>
-
-<!-- ══ SLIDE 8: TIMELINE ═══════════════════════════════════════════════════ -->
-<div class="slide bg-dark" id="s8">
-  <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
+    <div class="logo"><div class="ld" style="background:var(--teal-500)"></div><div class="ld" style="background:var(--red)"></div><div class="ld" style="background:var(--yellow)"></div><span class="lt">SenseOn</span></div>
     <span class="stag">2026 Delivery Timeline</span>
   </div>
   <div class="sb">
     <div class="ey">When You'll See It</div>
     <h2 style="margin-bottom:18px;">2026 Roadmap by Quarter</h2>
 
-    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
       <div class="rq" style="border-top:3px solid var(--teal-500);">
         <div class="ql" style="color:var(--teal-400);">Q1 2026</div>
-        <div class="qtheme">Build the Foundation</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Universal log ingestion — any source, any format</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Automatic log normalisation (OCSF)</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Redesigned threat hunting experience</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Regulatory-grade immutable storage (WORM)</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Richer endpoint telemetry & event enrichment</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Antivirus engine integration</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Streamlined admin onboarding</div>
+        <div class="qt">Foundation</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Investigation Orchestrator — General Availability</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Universal log ingestion — any source, any format</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Automatic log normalisation (OCSF)</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Redesigned threat hunting experience</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Richer endpoint telemetry &amp; enrichment</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Onboarding simplification v1</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Regulatory immutable log storage (WORM)</div>
       </div>
 
       <div class="rq" style="border-top:3px solid var(--purple-500);">
         <div class="ql" style="color:var(--purple-300);">Q2 2026</div>
-        <div class="qtheme">Unlock Intelligence</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Resolve AI — autonomous case investigation</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>AI-powered natural language threat hunting</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Flexible log collection — any cloud, any environment</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Self-serve customer log onboarding</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>USB device control — General Availability</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Extended endpoint telemetry coverage</div>
+        <div class="qt">Acceleration</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Resolve AI — autonomous case closure at scale</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Agentic workflows expanded across core use cases</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>AI-powered natural language threat hunting</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Flexible log collection — any cloud, any environment</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>USB device control — General Availability</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Self-serve customer log onboarding</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>SLO enforcement + platform reliability hardening</div>
       </div>
 
       <div class="rq" style="border-top:3px solid var(--yellow);">
         <div class="ql" style="color:var(--yellow);">Q3 2026</div>
-        <div class="qtheme">Scale & Deepen</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Historical investigation — query any archived data</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Threat detection on all ingested log data</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Advanced platform analytics &amp; dashboards</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Expanded agentic AI capabilities</div>
+        <div class="qt">Expansion</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>DORA &amp; NIS2 Compliance Module — GA</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Threat detection on all ingested log data</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Historical investigation — query any archived data</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Advanced platform analytics &amp; Reveal dashboards</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Expanded integrations &amp; third-party connectors</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Usage-based expansion pathways (credits)</div>
       </div>
 
       <div class="rq" style="border-top:3px solid var(--red);">
         <div class="ql" style="color:var(--red);">Q4 2026</div>
-        <div class="qtheme">Autonomous Platform</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>SenseAI — AI companion across the platform</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Zero-touch customer activation</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Expanded log coverage — new sources &amp; protocols</div>
-        <div class="qi"><div class="qi-dot" style="background:var(--teal-500)"></div>Consumption-based pricing model</div>
+        <div class="qt">Achievement</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Full 8-agent ecosystem in production</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>SenseAI — AI companion across the platform</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Self-serve expansion — zero-touch customer activation</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Board-ready security reporting</div>
+        <div class="qi"><div class="qd" style="background:var(--teal-500)"></div>Consumption-based pricing model — live</div>
       </div>
     </div>
 
-    <div style="margin-top:14px; font-size:11px; color:var(--neutral-400); font-style:italic; text-align:right;">
-      Indicative roadmap — subject to change based on customer feedback and priorities.
-    </div>
+    <div style="margin-top:14px;font-size:11px;color:var(--neutral-400);font-style:italic;text-align:right;">Indicative roadmap — subject to change. We build in response to customer feedback.</div>
   </div>
   <div class="sf"><span>SenseOn 2026 Roadmap</span><span>senseon.io</span></div>
 </div>
 
-<!-- ══ SLIDE 9: WHAT THIS MEANS FOR YOU ════════════════════════════════════ -->
-<div class="slide bg-cover" id="s9">
+<!-- ══ S8: WHAT THIS MEANS ════════════════════════════════════════════════ -->
+<div class="slide bg-cover" id="s8">
   <div class="sh">
-    <div class="logo"><div class="logo-dot" style="background:var(--teal-500)"></div><div class="logo-dot" style="background:var(--red)"></div><div class="logo-dot" style="background:var(--yellow)"></div><span class="logo-text">SenseOn</span></div>
+    <div class="logo"><div class="ld" style="background:var(--teal-500)"></div><div class="ld" style="background:var(--red)"></div><div class="ld" style="background:var(--yellow)"></div><span class="lt">SenseOn</span></div>
     <span class="stag">The Outcome</span>
   </div>
   <div class="sb">
     <div class="ey">What This Means For You</div>
-    <h2 style="margin-bottom:24px;">A Security Team That<br><span class="gt">Punches Above Its Weight</span></h2>
+    <h2 style="margin-bottom:24px;">Security Teams<br><span class="gt">Liberated From Complexity</span></h2>
 
-    <div class="g2" style="gap:14px; margin-bottom:20px;">
-      <div class="card" style="border-left:3px solid var(--teal-500); padding:20px;">
-        <div style="font-size:22px; margin-bottom:10px;">⚡</div>
-        <h3 style="font-size:15px; margin-bottom:8px;">Faster Response. Every Time.</h3>
-        <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">AI investigates alerts in seconds. Your analysts focus on confirmed threats, not triage queues. Mean time to respond drops dramatically.</p>
+    <div class="g2" style="gap:14px;margin-bottom:20px;">
+      <div class="card" style="border-left:3px solid var(--teal-500);padding:20px;">
+        <div style="font-size:20px;margin-bottom:10px;">⚡</div>
+        <h3 style="font-size:15px;margin-bottom:8px;">Your Analysts, 10x More Effective</h3>
+        <p style="font-size:12.5px;color:var(--neutral-400);line-height:1.6;">AI handles the case volume. Your team focuses on the cases that genuinely need human judgement. One customer went from 40 cases per day to 40 per month — same team, same headcount.</p>
       </div>
-      <div class="card" style="border-left:3px solid var(--purple-500); padding:20px;">
-        <div style="font-size:22px; margin-bottom:10px;">🔭</div>
-        <h3 style="font-size:15px; margin-bottom:8px;">No More Blind Spots.</h3>
-        <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">Every endpoint, every log, every network flow — correlated in one place. Attackers can no longer hide in the gaps between tools.</p>
+      <div class="card" style="border-left:3px solid var(--purple-500);padding:20px;">
+        <div style="font-size:20px;margin-bottom:10px;">🔭</div>
+        <h3 style="font-size:15px;margin-bottom:8px;">No Data Left Behind</h3>
+        <p style="font-size:12.5px;color:var(--neutral-400);line-height:1.6;">Every log, from every source, in one place — at a cost that doesn't force you to choose what to collect. Attackers can no longer hide in the data you couldn't afford to keep.</p>
       </div>
-      <div class="card" style="border-left:3px solid var(--yellow); padding:20px;">
-        <div style="font-size:22px; margin-bottom:10px;">💰</div>
-        <h3 style="font-size:15px; margin-bottom:8px;">Dramatically Lower Data Costs.</h3>
-        <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">Ingest everything your team needs — not just what you can afford. Our data platform costs a fraction of legacy SIEM for the same coverage.</p>
+      <div class="card" style="border-left:3px solid var(--yellow);padding:20px;">
+        <div style="font-size:20px;margin-bottom:10px;">📋</div>
+        <h3 style="font-size:15px;margin-bottom:8px;">Compliance That Doesn't Cost Extra</h3>
+        <p style="font-size:12.5px;color:var(--neutral-400);line-height:1.6;">DORA, NIS2, SOC 2, ISO 27001 — evidence packs and compliance outputs emerge naturally from data you're already collecting. Audit readiness as a by-product of good security operations.</p>
       </div>
-      <div class="card" style="border-left:3px solid var(--green); padding:20px;">
-        <div style="font-size:22px; margin-bottom:10px;">📋</div>
-        <h3 style="font-size:15px; margin-bottom:8px;">Compliance-Ready by Design.</h3>
-        <p style="font-size:12.5px; color:var(--neutral-400); line-height:1.6;">WORM immutable storage, full audit trails, and data retention controls built in — supporting SOC 2, ISO 27001, and GDPR requirements without additional tooling.</p>
+      <div class="card" style="border-left:3px solid var(--green);padding:20px;">
+        <div style="font-size:20px;margin-bottom:10px;">🏛️</div>
+        <h3 style="font-size:15px;margin-bottom:8px;">Security Intelligence to the C-Suite</h3>
+        <p style="font-size:12.5px;color:var(--neutral-400);line-height:1.6;">Risk reporting that leadership actually understands. Board-ready dashboards. Security clarity that travels from the SOC to the boardroom — without a week of manual preparation.</p>
       </div>
     </div>
 
-    <div style="display:flex; align-items:center; gap:20px; padding:18px 22px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:12px;">
-      <div style="font-size:28px;">💬</div>
+    <div style="display:flex;align-items:center;gap:20px;padding:18px 22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;">
       <div style="flex:1;">
-        <div style="font-size:13px; color:var(--neutral-300); line-height:1.6; font-style:italic;">"We want your security team to feel like they have a 10x bigger team. Every analyst capable of investigating threats faster, hunting further, and responding with confidence."</div>
-        <div style="font-size:11px; color:var(--neutral-400); margin-top:6px;">SenseOn Engineering — 2026 Mission</div>
+        <div style="font-size:14px;font-weight:700;color:white;margin-bottom:6px;">Ready to see it in action?</div>
+        <div style="font-size:13px;color:var(--neutral-400);line-height:1.6;">Start a proof of value with your own data in days — not months. See Resolve AI working on your cases, your logs, your environment.</div>
       </div>
-      <div style="flex-shrink:0;">
-        <div style="font-size:11px; color:var(--neutral-400);">Questions?</div>
-        <div style="font-size:13px; font-weight:600; color:var(--teal-400);">hello@senseon.io</div>
+      <div style="flex-shrink:0;display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+        <div style="padding:10px 18px;background:var(--teal-600);border-radius:8px;font-size:13px;font-weight:600;color:white;">hello@senseon.io</div>
+        <div style="font-size:11px;color:var(--neutral-400);">senseon.io</div>
       </div>
     </div>
   </div>
@@ -616,10 +501,10 @@ h3  { font-size:clamp(15px,1.6vw,20px); font-weight:600; line-height:1.3; }
 
 <!-- NAV -->
 <div class="nav" id="nav">
-  <button class="nav-btn" id="prev">&#8249;</button>
-  <div class="nav-dots" id="dots"></div>
-  <button class="nav-btn" id="next">&#8250;</button>
-  <span class="slide-counter" id="counter">1 / 9</span>
+  <button class="nb" id="prev">&#8249;</button>
+  <div class="nd" id="dots"></div>
+  <button class="nb" id="next">&#8250;</button>
+  <span class="nc" id="counter">1 / 8</span>
 </div>
 
 <script>
@@ -639,7 +524,7 @@ function goTo(idx, dir = 1) {
   if (isAnim || idx === current) return;
   isAnim = true;
   const from = slides[current], to = slides[idx];
-  to.style.cssText = 'transition:none; opacity:0; transform:translateX(' + (dir > 0 ? '60px' : '-60px') + ')';
+  to.style.cssText = 'transition:none;opacity:0;transform:translateX(' + (dir > 0 ? '60px' : '-60px') + ')';
   to.getBoundingClientRect();
   from.classList.add('exit');
   from.classList.remove('active');
